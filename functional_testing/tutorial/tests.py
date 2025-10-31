@@ -10,21 +10,12 @@ class TutorialViewTests(unittest.TestCase):
     def tearDown(self):
         testing.tearDown()
 
-    def test_home(self):
-        from .views import home
+    def test_hello_world(self):
+        from tutorial import hello_world
 
         request = testing.DummyRequest()
-        response = home(request)
+        response = hello_world(request)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"Visit", response.body)
-
-    def test_hello(self):
-        from .views import hello
-
-        request = testing.DummyRequest()
-        response = hello(request)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b"Go back", response.body)
 
 
 class TutorialFunctionalTests(unittest.TestCase):
@@ -36,10 +27,6 @@ class TutorialFunctionalTests(unittest.TestCase):
 
         self.testapp = TestApp(app)
 
-    def test_home(self):
+    def test_hello_world(self):
         res = self.testapp.get("/", status=200)
-        self.assertIn(b"<body>Visit", res.body)
-
-    def test_hello(self):
-        res = self.testapp.get("/howdy", status=200)
-        self.assertIn(b"<body>Go back", res.body)
+        self.assertIn(b"<h1>Hello World!</h1>", res.body)

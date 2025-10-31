@@ -62,3 +62,9 @@ Berdasarkan pengamatan saya, di guide ini kita diberitahu cara menginstall webte
 Berdasarkan pengamatan saya, di guide ini kita diberitahu kalau cara yang bagus itu memisah views sebagai file terpisah. Contoh kode menunjukkan dengan cara menulis route di views.py kemudian menambahkan kode untuk scan .views di app.py
 
 ## 08: HTML Generation With Templating
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu kalau kita bisa melakukan cara yang lebih efisien untuk menampilkan html. yaitu dengan cara membuat 1 template html kemudian menggunakannya berulang, jadi kita cukup memasukkan data saja ke dalamnya.
+
+di dalam kode nya kita menggunakan decorator @view_config untuk melakukan hal tersebut.
+
+## 09: Organizing Views With View Classes
