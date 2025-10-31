@@ -34,3 +34,13 @@ tebakan saya benar bahwa fungsinya untuk mengecek dependency yang dibutuhkan apa
 Kemudian saya coba menjalankan file app.py di `package/tutorial`. Hasilnya sama seperti guide yang pertama, ini menampilkan Hello, world!
 
 ## 03: Application Configuration with .ini Files
+
+Disini kita melakukan copy folder sebelumnya kemudian menambahkan sebuah line code di setup.py yang menurut analisa saya ini untuk menentukan entry point dari app nya.
+
+Kemudian kita merefactor `__init__.py` dan menghapus app.py
+
+Menurut pemahaman saya kenapa harus dipindah karena di konfigurasi yg di setup itu kita menulis tutorial:main. kalo tetap di app.py berarti harus nulis tutorial.app:main.
+
+Hmm. Inti dari guide ini menurut saya untuk kita mengetahui kalau kita bisa melakukan konfigurasi menggunakan file .ini
+
+## 04: Easier Development with debugtoolbar
