@@ -76,3 +76,7 @@ Berdasarkan pengamatan saya, di guide ini kita diberitahu kalo kita bisa menghem
 Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara mendapatkan data dari web request. dalam kasus yg diberikan, kode mencoba mendapatkan data nama kemudian melakukan render html menggunakan data tersebut.
 
 ## 11: Dispatching URLs To Views With Routing
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara mendapatkan multi parameter dari request kemudian melakukan render html menggunakan data dari parameter tersebut.
+
+## 12: Templating With jinja2
