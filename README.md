@@ -39,8 +39,18 @@ Disini kita melakukan copy folder sebelumnya kemudian menambahkan sebuah line co
 
 Kemudian kita merefactor `__init__.py` dan menghapus app.py
 
-Menurut pemahaman saya kenapa harus dipindah karena di konfigurasi yg di setup itu kita menulis tutorial:main. kalo tetap di app.py berarti harus nulis tutorial.app:main.
+Menurut pemahaman saya kenapa harus dipindah, karena di konfigurasi yg ada di setup itu kita menulis tutorial:main. kalo kodenya tetap di app.py berarti harus nulis tutorial.app:main.
 
 Hmm. Inti dari guide ini menurut saya untuk kita mengetahui kalau kita bisa melakukan konfigurasi menggunakan file .ini
 
 ## 04: Easier Development with debugtoolbar
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu cara menginstall debugtoolbar supaya memudahkan kita melakukan pengembangan web karena errornya lebih mudah ditracking menggunakan alat ini.
+
+Kemudian alasan kenapa menggunakan extra require karena kita perlu menambahkan flag dev di confignya, tujuannya supaya alat ini diinstall saat pengembangan aja.
+
+## 05: Unit Tests and pytest
+
+Berdasarkan pengamtan saya, di guide ini kita diberitahu cara menginstall pytest agar kita bisa melakukan pengetesan secara otomatis. Maksudnya otomatis itu kita cukup menjalankan scripy python lain untuk menguji kita error atau ga, lebih akurat dibandingkan manual seharusnya.
+
+## 06: Functional Testing with WebTest
