@@ -72,3 +72,7 @@ di dalam kode nya kita menggunakan decorator @view_config untuk melakukan hal te
 Berdasarkan pengamatan saya, di guide ini kita diberitahu kalo kita bisa menghemat baris kode dengan cara menulis default view nya di atas kelas. Ini bisa digunakan di dalam kasus beberapa fungsi menggunakan template yang sama.
 
 ## 10: Handling Web Requests and Responses
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara mendapatkan data dari web request. dalam kasus yg diberikan, kode mencoba mendapatkan data nama kemudian melakukan render html menggunakan data tersebut.
+
+## 11: Dispatching URLs To Views With Routing
