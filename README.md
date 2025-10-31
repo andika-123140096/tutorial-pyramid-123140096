@@ -68,3 +68,7 @@ Berdasarkan pengamatan saya, di guide ini kita diberitahu kalau kita bisa melaku
 di dalam kode nya kita menggunakan decorator @view_config untuk melakukan hal tersebut.
 
 ## 09: Organizing Views With View Classes
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu kalo kita bisa menghemat baris kode dengan cara menulis default view nya di atas kelas. Ini bisa digunakan di dalam kasus beberapa fungsi menggunakan template yang sama.
+
+## 10: Handling Web Requests and Responses
