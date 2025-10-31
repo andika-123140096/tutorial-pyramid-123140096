@@ -54,3 +54,11 @@ Kemudian alasan kenapa menggunakan extra require karena kita perlu menambahkan f
 Berdasarkan pengamtan saya, di guide ini kita diberitahu cara menginstall pytest agar kita bisa melakukan pengetesan secara otomatis. Maksudnya otomatis itu kita cukup menjalankan scripy python lain untuk menguji kita error atau ga, lebih akurat dibandingkan manual seharusnya.
 
 ## 06: Functional Testing with WebTest
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu cara menginstall webtest agar kita bisa melakukan pengujian otomatis ke suatu halaman web. misal halaman / harus menampilkan Hello, world! maka dengan menggunakan tools ini kita bisa mengujinya menggunakan script python.
+
+## 07: Basic Web Handling With Views
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu kalau cara yang bagus itu memisah views sebagai file terpisah. Contoh kode menunjukkan dengan cara menulis route di views.py kemudian menambahkan kode untuk scan .views di app.py
+
+## 08: HTML Generation With Templating
