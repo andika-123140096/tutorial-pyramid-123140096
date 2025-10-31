@@ -18,4 +18,19 @@ Ketika saya buka halaman http://localhost:6543/ muncul teks Hello, world!
 
 Saya udah setup venv, tapi folder .venv nya tidak saya commit juga hehe.
 
-02: Python Packages for Pyramid Applications
+## 02: Python Packages for Pyramid Applications
+
+Oke, disini kita disuruh menambahkan file setup.py yang isinya itu menurut sepemahaman saya sebuah kode yg mengecek dependency python yg dibutuhkan apakah sudah terinstall apa belum.
+
+Ketika saya menjalankan command di bawah ini.
+
+```
+cd package
+pip install -e .
+```
+
+tebakan saya benar bahwa fungsinya untuk mengecek dependency yang dibutuhkan apakah sudah terinstall atau belum.
+
+Kemudian saya coba menjalankan file app.py di `package/tutorial`. Hasilnya sama seperti guide yang pertama, ini menampilkan Hello, world!
+
+## 03: Application Configuration with .ini Files
