@@ -84,3 +84,7 @@ Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara mendapa
 Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara menggunakan engine template lain yaitu `jinja2`. Syntax nya hampir mirip dengan template yang default.
 
 ## 13: CSS/JS/Images Files With Static Assets
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana caranya menggunakan templating untuk melakukan embed file. Alasannya supaya lebih tidak repot ketika foldernya berubah, karena URL file nya akan digenerate oleh pyramid, berbeda dengan ketika menulis URL file nya manual.
+
+## 14: AJAX Development With JSON Renderers
