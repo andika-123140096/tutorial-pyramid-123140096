@@ -100,3 +100,5 @@ Di guide ini kita mengetahui bahwa kita bisa mengimplementasikan custom request 
 Di guide ini kita mengetahui bahwa kita bisa menghidupkan sebuah logger dengan menggunakan konfigurasi pyramid. Dengan menggunakan logger kita bisa memantau aktivitas dari terminal.
 
 ## 17: Transient Data Using Sessions
+
+Di guide ini kita mengetahui cara menambahkan session di dalam object request. guna nya itu untuk menyimpan state yang dilakukan pengguna di server web. misal di contoh itu menyimpan state counter, tapi di dunia nyata biasanya untuk menyimpan state apakah user udah login atau belum.
