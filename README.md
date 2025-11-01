@@ -88,3 +88,7 @@ Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara menggun
 Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana caranya menggunakan templating untuk melakukan embed file. Alasannya supaya lebih tidak repot ketika foldernya berubah, karena URL file nya akan digenerate oleh pyramid, berbeda dengan ketika menulis URL file nya manual.
 
 ## 14: AJAX Development With JSON Renderers
+
+Di guide ini kita mengetahui bahwa kita bisa menggunakan custom renderer json untuk merender json. Kemudian kita bisa melakukan overriding default config.
+
+## 15: More With View Classes
