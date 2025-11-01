@@ -96,3 +96,7 @@ Di guide ini kita mengetahui bahwa kita bisa menggunakan custom renderer json un
 Di guide ini kita mengetahui bahwa kita bisa mengimplementasikan custom request method dan custom form parameter ke views yang kita buat. Contohnya seperti POST dan DELETE. jadi satu route yaitu /hello bisa menerima beberapa jenis request, tinggal digabung aja jadi satu class.
 
 ## 16: Collecting Application Info With Logging
+
+Di guide ini kita mengetahui bahwa kita bisa menghidupkan sebuah logger dengan menggunakan konfigurasi pyramid. Dengan menggunakan logger kita bisa memantau aktivitas dari terminal.
+
+## 17: Transient Data Using Sessions
