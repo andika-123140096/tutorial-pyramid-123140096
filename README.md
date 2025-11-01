@@ -102,3 +102,47 @@ Di guide ini kita mengetahui bahwa kita bisa menghidupkan sebuah logger dengan m
 ## 17: Transient Data Using Sessions
 
 Di guide ini kita mengetahui cara menambahkan session di dalam object request. guna nya itu untuk menyimpan state yang dilakukan pengguna di server web. misal di contoh itu menyimpan state counter, tapi di dunia nyata biasanya untuk menyimpan state apakah user udah login atau belum.
+
+## 18: Forms and Validation with Deform
+
+Di guide ini kita mengetahui cara menambahkan deform untuk melakukan validasi data yang dimasukkan ke dalam form.
+
+Kita membuat schema dulu, terus inisiasi deform menggunakan schema tersebut. Dalam guide ini, schema nya adalah berikut:
+
+```python
+class WikiPage(colander.MappingSchema):
+    title = colander.SchemaNode(colander.String())
+    body = colander.SchemaNode(colander.String(), widget=deform.widget.RichTextWidget())
+
+```
+
+Nah enaknya itu the rest kita cuma panggil fungsi validate aja. Contohnya:
+
+```python
+@view_config(route_name="wikipage_add", renderer="wikipage_addedit.pt")
+    def wikipage_add(self):
+        form = self.wiki_form.render()
+
+        if "submit" in self.request.params:
+            controls = self.request.POST.items()
+            try:
+                appstruct = self.wiki_form.validate(controls)
+            except deform.ValidationFailure as e:
+                # Form is NOT valid
+                return dict(form=e.render())
+
+            # Form is valid, make a new identifier and add to list
+            last_uid = int(sorted(pages.keys())[-1])
+            new_uid = str(last_uid + 1)
+            pages[new_uid] = dict(
+                uid=new_uid, title=appstruct["title"], body=appstruct["body"]
+            )
+
+            # Now visit new page
+            url = self.request.route_url("wikipage_view", uid=new_uid)
+            return HTTPFound(url)
+
+        return dict(form=form)
+```
+
+## 19: Databases Using SQLAlchemy
