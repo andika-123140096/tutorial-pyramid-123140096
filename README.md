@@ -80,3 +80,7 @@ Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara mendapa
 Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara mendapatkan multi parameter dari request kemudian melakukan render html menggunakan data dari parameter tersebut.
 
 ## 12: Templating With jinja2
+
+Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana cara menggunakan engine template lain yaitu `jinja2`. Syntax nya hampir mirip dengan template yang default.
+
+## 13: CSS/JS/Images Files With Static Assets
