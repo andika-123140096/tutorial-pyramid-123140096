@@ -146,3 +146,48 @@ Nah enaknya itu the rest kita cuma panggil fungsi validate aja. Contohnya:
 ```
 
 ## 19: Databases Using SQLAlchemy
+
+Di dalam guide ini kita menginstall package pyramid_tm dan zope.sqlalchemy. Untuk package zope.sqlalchemy itu untuk menghubungkan pyramid dengan database, i guess ini sqlite.
+
+Kemudian kalo pyramid_tm itu untuk mempermudah kita melakukan transaction. Transaction di dalam database itu secara simpelnya untuk menyediakan checkpoint, misal kita menambahkan sesuatu ke table, kemudian terjadi error. nah itu bisa dirollback jika menggunakan transaction. Dalam kasus ini kita disuruh menambahkan aja ke pyramid, tidak secara explisit ada kode yg menggunakan, jadi saya asumsikan ini terjadi mekanisme otomatis.
+
+Nah database kita itu disimpan di `databases/sqltutorial.sqlite`. Kita awalnya mendifinisikan sebuah model, kemudian kita bisa melakukan migrate supaya class yg kita buat berubah menjadi table di database.
+
+```python
+from pyramid.authorization import Allow, Everyone
+
+from sqlalchemy import (
+    Column,
+    Integer,
+    Text,
+)
+
+from sqlalchemy.ext.declarative import declarative_base
+
+from sqlalchemy.orm import (
+    scoped_session,
+    sessionmaker,
+)
+
+from zope.sqlalchemy import register
+
+DBSession = scoped_session(sessionmaker())
+register(DBSession)
+Base = declarative_base()
+
+
+class Page(Base):
+    __tablename__ = "wikipages"
+    uid = Column(Integer, primary_key=True)
+    title = Column(Text, unique=True)
+    body = Column(Text)
+
+
+class Root:
+    __acl__ = [(Allow, Everyone, "view"), (Allow, "group:editors", "edit")]
+
+    def __init__(self, request):
+        pass
+```
+
+## 20: Logins with authentication
