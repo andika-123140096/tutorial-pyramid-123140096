@@ -92,3 +92,7 @@ Berdasarkan pengamatan saya, di guide ini kita diberitahu bagaimana caranya meng
 Di guide ini kita mengetahui bahwa kita bisa menggunakan custom renderer json untuk merender json. Kemudian kita bisa melakukan overriding default config.
 
 ## 15: More With View Classes
+
+Di guide ini kita mengetahui bahwa kita bisa mengimplementasikan custom request method dan custom form parameter ke views yang kita buat. Contohnya seperti POST dan DELETE. jadi satu route yaitu /hello bisa menerima beberapa jenis request, tinggal digabung aja jadi satu class.
+
+## 16: Collecting Application Info With Logging
