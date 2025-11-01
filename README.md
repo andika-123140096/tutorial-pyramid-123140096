@@ -191,3 +191,54 @@ class Root:
 ```
 
 ## 20: Logins with authentication
+
+Di dalam guide ini kita mengetahui cara menginstall bcrypt yang gunanya untuk hashing password user. Nah berbeda dengan SHA-256 atau sejenisnya. Bcrypt ini memiliki secret key jika kita lihat di `development.ini`. Tapi itu sebenarnya sebuah salt, karena kalo secret_key berarti hashnya bisa didecrypt jika kita mengetahui dong. Tapi faktanya tidak bisa, salt itu menambahkan kekuatan cryptography nya.
+
+Kemudian kita menggunakan AuthTktCookieHelper agar pyramid menyimpan data nya di cookies. Nah cookies ini dienkripsi dengan secret_Key, jadi kalo ada orang mengetahui secret_key maka dia bisa membuat session custom.
+
+```
+5ce0756e13e79f5453d9c9180e0160ef80c6ee2962e4e7fbc3a2f4a959cafbae0a270afc915228a9759f238a8639b237117a21efad6f2f75c31c0dbaf9375354690573e2ZWRpdG9y!userid_type:b64unicode
+```
+
+Enaknya dengan menggunakan helper itu kita cukup panggil beberapa method aja, dan langsung bekerja.
+
+```python
+import bcrypt
+from pyramid.authentication import AuthTktCookieHelper
+
+
+def hash_password(pw):
+    pwhash = bcrypt.hashpw(pw.encode("utf8"), bcrypt.gensalt())
+    return pwhash.decode("utf8")
+
+
+def check_password(pw, hashed_pw):
+    expected_hash = hashed_pw.encode("utf8")
+    return bcrypt.checkpw(pw.encode("utf8"), expected_hash)
+
+
+USERS = {"editor": hash_password("editor"), "viewer": hash_password("viewer")}
+
+
+class SecurityPolicy:
+    def __init__(self, secret):
+        self.authtkt = AuthTktCookieHelper(secret=secret)
+
+    def identity(self, request):
+        identity = self.authtkt.identify(request)
+        if identity is not None and identity["userid"] in USERS:
+            return identity
+
+    def authenticated_userid(self, request):
+        identity = self.identity(request)
+        if identity is not None:
+            return identity["userid"]
+
+    def remember(self, request, userid, **kw):
+        return self.authtkt.remember(request, userid, **kw)
+
+    def forget(self, request, **kw):
+        return self.authtkt.forget(request, **kw)
+```
+
+## 21: Protecting Resources With Authorization
