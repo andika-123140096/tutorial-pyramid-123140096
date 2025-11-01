@@ -4,6 +4,8 @@
 
 ### Kelas: RA
 
+<hr>
+
 ## 01: Single-File Web Applications
 
 Menurut analisa saya, pada guide ini saya diajarkan tentang cara melakukan setup awal framework pyramid.
@@ -242,3 +244,99 @@ class SecurityPolicy:
 ```
 
 ## 21: Protecting Resources With Authorization
+
+Oke ini yang terakhir. Jadi di dalam guide ini kita mengetahui cara melakukan proteksi ke router tertentu, misal berdasarkan role. atau melakukan cek user udah login atau belum.
+
+Di security.py kita define kalo user login dia dapet permission apa aja. misalnya bisa edit.
+
+```python
+import bcrypt
+from pyramid.authentication import AuthTktCookieHelper
+from pyramid.authorization import (
+    ACLHelper,
+    Authenticated,
+    Everyone,
+)
+
+
+def hash_password(pw):
+    pwhash = bcrypt.hashpw(pw.encode("utf8"), bcrypt.gensalt())
+    return pwhash.decode("utf8")
+
+
+def check_password(pw, hashed_pw):
+    expected_hash = hashed_pw.encode("utf8")
+    return bcrypt.checkpw(pw.encode("utf8"), expected_hash)
+
+
+USERS = {"editor": hash_password("editor"), "viewer": hash_password("viewer")}
+GROUPS = {"editor": ["group:editors"]}
+
+
+class SecurityPolicy:
+    def __init__(self, secret):
+        self.authtkt = AuthTktCookieHelper(secret=secret)
+        self.acl = ACLHelper()
+
+    def identity(self, request):
+        identity = self.authtkt.identify(request)
+        if identity is not None and identity["userid"] in USERS:
+            return identity
+
+    def authenticated_userid(self, request):
+        identity = self.identity(request)
+        if identity is not None:
+            return identity["userid"]
+
+    def remember(self, request, userid, **kw):
+        return self.authtkt.remember(request, userid, **kw)
+
+    def forget(self, request, **kw):
+        return self.authtkt.forget(request, **kw)
+
+    def permits(self, request, context, permission):
+        principals = self.effective_principals(request)
+        return self.acl.permits(context, principals, permission)
+
+    def effective_principals(self, request):
+        principals = [Everyone]
+        userid = self.authenticated_userid(request)
+        if userid is not None:
+            principals += [Authenticated, "u:" + userid]
+            principals += GROUPS.get(userid, [])
+        return principals
+```
+
+Kemudian di views.py kita bisa definisikan proteksi untuk setiap route menggunakan decorator @view_config dan parameter permission. Kenapa ini works? karena di kode security ada logic yg melakukan check request apakah user memiliki akses.
+
+```python
+    def effective_principals(self, request):
+        principals = [Everyone]
+        userid = self.authenticated_userid(request)
+        if userid is not None:
+            principals += [Authenticated, "u:" + userid]
+            principals += GROUPS.get(userid, [])
+        return principals
+```
+
+Dan kalo kamu bingung kenapa fungsi di atas dipanggil. Karena di `__init__.py` itu dideklrasi.
+
+```python
+config.set_security_policy(
+        SecurityPolicy(
+            secret=settings["tutorial.secret"],
+        ),
+    )
+```
+
+Kemudian ada 2 perbedaan antara user dan principals, user itu seseorang yang mengakses atau menggunakan webnya. Sedangkan principals itu sebuah penanda untuk membuktikan orang tersebut memiliki akses yang sah.
+
+Apakah kita bisa menggunakan database untuk mengelola data principles? ya tentu aja bisa, database dan memory itu sama-sama penyimpanan, bedanya kalo di memory itu hanya sementara.
+
+Apakah kita harus memasukkan renderer di @forbidden_view_config? jawabannya engga, kalo ga dimasukin nanti muncul default halaman 403.
+
+Perhaps you would like the experience of not having enough permissions (forbidden) to be richer. How could you change this? Saya akan mengubah pesan forbidddennya menjadi lebih mudah dipahami, jadi user bisa login ulang menggunakan akun dengan permission lebih tinggi.
+
+Perhaps we want to store security statements in a database and allow editing via a browser. How might this be done? Sebenarnya bisa aja, kita perlu mapping ulang fungsi yg mengelola security statementsnya.
+
+What if we want different security statements on different kinds of objects? Or on the same kinds of objects, but in different parts of a URL hierarchy? Di pyramid bisa bikin multi security rules, jadi ya ini bisa dilakukan, cuma how to nya ya baca docs lagi hehe.
